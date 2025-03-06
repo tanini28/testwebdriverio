@@ -1,10 +1,14 @@
-describe('login with invalid password', () => {
-    it('should display error message', async () => {
-        await browser.url('https://www.saucedemo.com');
-        await $('#user-name').setValue('standard_user');
-        await $('#password').setValue('invalid_password');
-        await $('#login-button').click();
-        await expect($('.error-message-container')).toBeDisplayed();
-        await expect($('.error-message-container')).toHaveText('Epic sadface: Username and password do not match any user in this service');
+import LoginPage from '../pageobjects/login.page.js';
+
+describe('Login with invalid password', () => {
+    beforeEach(async () => {
+        await LoginPage.open();
+    });
+
+    it('should display error message for invalid password', async () => {
+        await LoginPage.login('standard_user', 'invalid_password');
+        
+        const errorMessage = await LoginPage.getErrorMessage();
+        await expect(errorMessage).toBe('Epic sadface: Username and password do not match any user in this service');
     });
 });

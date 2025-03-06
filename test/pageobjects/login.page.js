@@ -1,24 +1,25 @@
-
 import Page from './page.js';
 
-class LoginPage {
-    get usernameInput() { return $('#username'); }
+class LoginPage extends Page {
+    get usernameInput() { return $('#user-name'); }
     get passwordInput() { return $('#password'); }
     get loginButton() { return $('#login-button'); }
-    get errorMessage() { return $('#error-message'); }
+    get errorMessageContainer() { return $('.error-message-container'); }
 
     async open() {
-        await browser.url('/login');
+        await super.open();
     }
 
     async login(username, password) {
+        await this.usernameInput.waitForDisplayed({ timeout: 5000 });
         await this.usernameInput.setValue(username);
         await this.passwordInput.setValue(password);
         await this.loginButton.click();
     }
 
     async getErrorMessage() {
-        return await this.errorMessage.getText();
+        await this.errorMessageContainer.waitForDisplayed({ timeout: 5000 });
+        return await this.errorMessageContainer.getText();
     }
 }
 
