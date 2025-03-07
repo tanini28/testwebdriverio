@@ -1,18 +1,32 @@
-class SortingPage {
+import Page from './page.js';
+
+class SortingPage extends Page {
     get sortingDropdown() { return $('#sorting-dropdown'); }
     get items() { return $$('.item'); }
 
     async open() {
-        await browser.url('/sorting');
+        await super.open('/sorting');
     }
 
     async selectSortingOption(option) {
+        await this.sortingDropdown.waitForDisplayed({ timeout: 5000 });
         await this.sortingDropdown.selectByVisibleText(option);
     }
 
+    async getItemTexts() {
+        const items = await this.items;
+        const texts = [];
+        
+        for (const item of items) {
+            texts.push(await item.getText());
+        }
+        
+        return texts;
+    }
+    
     async isSortedBy(option) {
-        const itemTexts = await this.items.map(async (item) => await item.getText());
-      
+        const itemTexts = await this.getItemTexts();
+
         return true; 
     }
 }

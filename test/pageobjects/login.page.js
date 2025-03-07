@@ -8,13 +8,13 @@ class LoginPage extends Page {
 
     async open() {
         await super.open();
-        // Wait for the page to be fully loaded
+
         await this.usernameInput.waitForExist({ timeout: 15000 });
     }
 
     async login(username, password) {
         try {
-            // Add more reliable waits
+
             await this.usernameInput.waitForClickable({ timeout: 15000 });
             await this.usernameInput.setValue(username);
             
@@ -23,8 +23,7 @@ class LoginPage extends Page {
             
             await this.loginButton.waitForClickable({ timeout: 10000 });
             await this.loginButton.click();
-            
-            // Wait for navigation to complete
+
             await browser.waitUntil(
                 async () => {
                     const url = await browser.getUrl();
@@ -41,3 +40,11 @@ class LoginPage extends Page {
             throw error;
         }
     }
+    
+    async getErrorMessage() {
+        await this.errorMessageContainer.waitForDisplayed({ timeout: 5000 });
+        return await this.errorMessageContainer.getText();
+    }
+}
+
+export default new LoginPage();
