@@ -11,8 +11,11 @@ class FooterPage extends Page {
     }
   
     async verifyAllSocialLinks() {
+       await browser.pause(1000);
+        
         // Twitter
         await this.clickSocialLink(this.twitterLink);
+        await browser.pause(1000);
         let handles = await browser.getWindowHandles();
         await expect(handles.length).toBe(2); 
         await browser.switchToWindow(handles[1]);
@@ -20,7 +23,9 @@ class FooterPage extends Page {
         await browser.switchToWindow(handles[0]);
         
         // Facebook
+        await browser.pause(1000);
         await this.clickSocialLink(this.facebookLink);
+        await browser.pause(1000);
         handles = await browser.getWindowHandles();
         await expect(handles.length).toBe(2); 
         await browser.switchToWindow(handles[1]);
@@ -28,7 +33,9 @@ class FooterPage extends Page {
         await browser.switchToWindow(handles[0]);
         
         // LinkedIn
+        await browser.pause(1000);
         await this.clickSocialLink(this.linkedinLink);
+        await browser.pause(1000);
         handles = await browser.getWindowHandles();
         await expect(handles.length).toBe(2); 
         await browser.switchToWindow(handles[1]);

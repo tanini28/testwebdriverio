@@ -1,4 +1,3 @@
-
 import Page from './page.js';
 
 class InventoryPage extends Page {
@@ -36,11 +35,20 @@ class InventoryPage extends Page {
     async sortBy(option) {
         await this.sortDropdown.waitForDisplayed({ timeout: 5000 });
         await this.sortDropdown.selectByVisibleText(option);
+
+        await browser.pause(500);
     }
 
     async getItemNames() {
         const items = await this.inventoryItems;
-        return Promise.all(items.map(async item => await item.getText()));
+        const nameTexts = [];
+        
+        for (const item of items) {
+            const text = await item.getText();
+            nameTexts.push(text);
+        }
+        
+        return nameTexts;
     }
 
     async getItemPrices() {

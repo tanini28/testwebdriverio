@@ -15,12 +15,21 @@ class CartPage extends Page {
     }
     
     async isCartItemDisplayed() {
-        return await this.cartItem.isDisplayed();
+        try {
+           await this.cartItem.waitForDisplayed({ timeout: 2000 });
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
     
     async getErrorMessage() {
-        await this.errorMessage.waitForDisplayed({ timeout: 5000 });
-        return await this.errorMessage.getText();
+        try {
+            await this.errorMessage.waitForDisplayed({ timeout: 5000 });
+            return await this.errorMessage.getText();
+        } catch (error) {
+            return '';
+        }
     }
 }
 
