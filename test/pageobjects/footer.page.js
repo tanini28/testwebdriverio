@@ -35,3 +35,4 @@ class footerPage extends Page {
         await this.verifySocialLinkOpensNewTab(this.linkedinLink);
     }
 }
+export default new footerPage();

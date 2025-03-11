@@ -50,4 +50,4 @@ class checkoutPage extends Page {
     }
 }
 
-export default new CheckoutPage();
+export default new checkoutPage();

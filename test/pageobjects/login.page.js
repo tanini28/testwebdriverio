@@ -8,43 +8,18 @@ class loginPage extends Page {
 
     async open() {
         await super.open();
-
-        await this.usernameInput.waitForExist({ timeout: 15000 });
+        await this.usernameInput.waitForExist({ timeout: 5000 });
     }
 
-    async login(username, password) {
-        try {
-
-            await this.usernameInput.waitForClickable({ timeout: 15000 });
-            await this.usernameInput.setValue(username);
-            
-            await this.passwordInput.waitForClickable({ timeout: 10000 });
-            await this.passwordInput.setValue(password);
-            
-            await this.loginButton.waitForClickable({ timeout: 10000 });
-            await this.loginButton.click();
-
-            await browser.waitUntil(
-                async () => {
-                    const url = await browser.getUrl();
-                    return url.includes('inventory.html') || 
-                           await this.errorMessageContainer.isExisting();
-                },
-                {
-                    timeout: 15000,
-                    timeoutMsg: 'Login action did not complete in time'
-                }
-            );
-        } catch (error) {
-            console.error('Login failed:', error.message);
-            throw error;
-        }
+    async clickLogin() {
+        await this.loginButton.waitForClickable();
+        await this.loginButton.click();
     }
     
     async getErrorMessage() {
-        await this.errorMessageContainer.waitForDisplayed({ timeout: 5000 });
+        await this.errorMessageContainer.waitForDisplayed();
         return await this.errorMessageContainer.getText();
     }
 }
 
-export default new LoginPage();
+export default new loginPage();

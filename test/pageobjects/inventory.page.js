@@ -72,4 +72,4 @@ class inventoryPage extends Page {
     }
 }
 
-export default new InventoryPage();
+export default new inventoryPage();

@@ -31,4 +31,4 @@ class sortingPage extends Page {
     }
 }
 
-export default new SortingPage();
+export default new sortingPage();
