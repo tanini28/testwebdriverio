@@ -10,9 +10,9 @@ describe('Logout', () => {
 
     it('should logout successfully', async () => {
         await InventoryPage.logout();
+       await LoginPage.waitForUrl('/');
 
-        await LoginPage.waitForUrl('/');
-
-        await expect(LoginPage.loginButton).toBeDisplayed();
+        const isLoginButtonDisplayed = await LoginPage.loginButton.isDisplayed();
+        await expect(isLoginButtonDisplayed).toBe(true);
     });
 });

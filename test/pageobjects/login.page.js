@@ -8,7 +8,17 @@ class loginPage extends Page {
 
     async open() {
         await super.open();
-        await this.usernameInput.waitForExist({ timeout: 5000 });
+        await this.usernameInput.waitForExist();
+    }
+
+    async login(username, password) {
+        if (username) {
+            await this.usernameInput.setValue(username);
+        }
+        if (password) {
+            await this.passwordInput.setValue(password);
+        }
+        await this.clickLogin();
     }
 
     async clickLogin() {
@@ -19,6 +29,13 @@ class loginPage extends Page {
     async getErrorMessage() {
         await this.errorMessageContainer.waitForDisplayed();
         return await this.errorMessageContainer.getText();
+    }
+
+    async waitForUrl(urlPart) {
+        await browser.waitUntil(
+            async () => (await this.getCurrentUrl()).includes(urlPart),
+            { timeoutMsg: `URL did not include ${urlPart} after timeout` }
+        );
     }
 }
 

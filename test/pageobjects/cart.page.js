@@ -10,31 +10,18 @@ class cartPage extends Page {
     }
 
     async proceedToCheckout() {
-        await this.checkoutButton.waitForDisplayed({ timeout: 5000 });
+        await this.waitForElementClickable(this.checkoutButton);
         await this.checkoutButton.click();
     }
     
     async isCartItemDisplayed() {
-        try {
-
-            await this.cartItem.waitForDisplayed({ timeout: 2000, reverse: true });
-            return false;
-        } catch (error) {
-
-            if (error.name === 'TimeoutError') {
-                return true;
-            }
-            throw error;
-        }
+        // Более простая и прямая проверка наличия элемента
+        return await this.cartItem.isDisplayed().catch(() => false);
     }
     
     async getErrorMessage() {
-        try {
-            await this.errorMessage.waitForDisplayed({ timeout: 5000 });
-            return await this.errorMessage.getText();
-        } catch (error) {
-            return '';
-        }
+        await this.waitForElementDisplayed(this.errorMessage);
+        return await this.errorMessage.getText();
     }
 }
 
