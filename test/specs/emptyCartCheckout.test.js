@@ -10,12 +10,7 @@ describe('Checkout without products', () => {
 
     it('should verify the cart is empty', async () => {
         await InventoryPage.openCart();
-  
-        try {
-           await CartPage.cartItem.waitForDisplayed({ timeout: 1000, reverse: true });
-           await expect(true).toBe(true);
-        } catch (error) {
-           await expect(false).toBe(true, 'Cart should be empty but items were found');
-        }
+
+        await expect(CartPage.isCartItemDisplayed()).resolves.toBe(false);
     });
 });

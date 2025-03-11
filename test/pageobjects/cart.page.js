@@ -1,6 +1,6 @@
 import Page from './page.js';
 
-class CartPage extends Page {
+class cartPage extends Page {
     get cartItem() { return $('.cart_item'); }
     get checkoutButton() { return $('#checkout'); }
     get errorMessage() { return $('.error-message'); }
@@ -16,10 +16,15 @@ class CartPage extends Page {
     
     async isCartItemDisplayed() {
         try {
-           await this.cartItem.waitForDisplayed({ timeout: 2000 });
-            return true;
-        } catch (error) {
+
+            await this.cartItem.waitForDisplayed({ timeout: 2000, reverse: true });
             return false;
+        } catch (error) {
+
+            if (error.name === 'TimeoutError') {
+                return true;
+            }
+            throw error;
         }
     }
     

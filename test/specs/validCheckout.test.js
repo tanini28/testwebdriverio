@@ -11,7 +11,6 @@ describe('Valid Checkout', () => {
     });
     
     it('should complete checkout successfully', async () => {
-        
         const firstName = faker.person.firstName();
         const lastName = faker.person.lastName();
         const postalCode = faker.location.zipCode();
