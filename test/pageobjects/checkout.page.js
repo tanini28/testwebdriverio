@@ -1,6 +1,6 @@
-import Page from './page.js';
+import page from './page.js';
 
-class checkoutPage extends Page {
+class checkoutPage extends page {
     get firstNameField() { return $('#first-name'); }
     get lastNameField() { return $('#last-name'); }
     get postalCodeField() { return $('#postal-code'); }

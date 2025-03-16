@@ -1,5 +1,5 @@
-import LoginPage from '../pageobjects/login.page.js';
-import InventoryPage from '../pageobjects/inventory.page.js';
+import loginPage from '../pageobjects/login.page.js';
+import inventoryPage from '../pageobjects/inventory.page.js';
 
 describe('Sorting products', () => {
     const sortingOptions = [
@@ -22,19 +22,19 @@ describe('Sorting products', () => {
     ];
 
     beforeEach(async () => {
-        await LoginPage.open();
-        await LoginPage.login('standard_user', 'secret_sauce');
+        await loginPage.open();
+        await loginPage.login('standard_user', 'secret_sauce');
     });
 
     for (const { option, verify } of sortingOptions) {
         it(`should sort products by ${option}`, async () => {
-            await InventoryPage.sortBy(option);
+            await inventoryPage.sortBy(option);
             
             if (option.includes('Price')) {
-                const prices = await InventoryPage.getItemPrices();
+                const prices = await inventoryPage.getItemPrices();
                 await verify(prices);
             } else {
-                const names = await InventoryPage.getItemNames();
+                const names = await inventoryPage.getItemNames();
                 await verify(names);
             }
         });

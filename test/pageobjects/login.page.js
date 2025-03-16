@@ -1,6 +1,6 @@
-import Page from './page.js';
+import page from './page.js';
 
-class loginPage extends Page {
+class loginPage extends page {
     get usernameInput() { return $('#user-name'); }
     get passwordInput() { return $('#password'); }
     get loginButton() { return $('#login-button'); }

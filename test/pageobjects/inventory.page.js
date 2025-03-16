@@ -1,6 +1,6 @@
-import Page from './page.js';
+import page from './page.js';
 
-class inventoryPage extends Page {
+class inventoryPage extends page {
     get addToCartBackpackButton() { return $('#add-to-cart-sauce-labs-backpack'); }
     get cartBadge() { return $('.shopping_cart_badge'); }
     get burgerMenuButton() { return $('#react-burger-menu-btn'); }

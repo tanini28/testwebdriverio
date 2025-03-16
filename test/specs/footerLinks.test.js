@@ -1,13 +1,13 @@
-import LoginPage from '../pageobjects/login.page.js';
-import FooterPage from '../pageobjects/footer.page.js';
+import loginPage from '../pageobjects/login.page.js';
+import footerPage from '../pageobjects/footer.page.js';
 
 describe('Footer Links', () => {
     beforeEach(async () => {
-        await LoginPage.open();
-        await LoginPage.login('standard_user', 'secret_sauce');
+        await loginPage.open();
+        await loginPage.login('standard_user', 'secret_sauce');
     });
 
     it('should verify all footer links open in new tabs', async () => {
-        await FooterPage.verifyAllSocialLinks();
+        await footerPage.verifyAllSocialLinks();
     });
 });

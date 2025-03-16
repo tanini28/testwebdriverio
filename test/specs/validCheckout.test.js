@@ -1,13 +1,13 @@
-import LoginPage from '../pageobjects/login.page.js';
-import InventoryPage from '../pageobjects/inventory.page.js';
-import CartPage from '../pageobjects/cart.page.js';
-import CheckoutPage from '../pageobjects/checkout.page.js';
+import loginPage from '../pageobjects/login.page.js';
+import inventoryPage from '../pageobjects/inventory.page.js';
+import cartPage from '../pageobjects/cart.page.js';
+import checkoutPage from '../pageobjects/checkout.page.js';
 import { faker } from '@faker-js/faker';
 
 describe('Valid Checkout', () => {
     beforeEach(async () => {
-        await LoginPage.open();
-        await LoginPage.login('standard_user', 'secret_sauce');
+        await loginPage.open();
+        await loginPage.login('standard_user', 'secret_sauce');
     });
     
     it('should complete checkout successfully', async () => {
@@ -15,23 +15,23 @@ describe('Valid Checkout', () => {
         const lastName = faker.person.lastName();
         const postalCode = faker.location.zipCode();
         
-        await InventoryPage.addItemToCart();
-        await expect(InventoryPage.cartBadge).toHaveText('1');
+        await inventoryPage.addItemToCart();
+        await expect(inventoryPage.cartBadge).toHaveText('1');
 
-        await InventoryPage.openCart();
+        await inventoryPage.openCart();
         await expect(browser).toHaveUrlContaining('cart.html');
 
-        await CartPage.proceedToCheckout();
+        await cartPage.proceedToCheckout();
         await expect(browser).toHaveUrlContaining('checkout-step-one.html');
 
-        await CheckoutPage.fillCheckoutForm(firstName, lastName, postalCode);
-        await CheckoutPage.completeCheckout();
+        await checkoutPage.fillCheckoutForm(firstName, lastName, postalCode);
+        await checkoutPage.completeCheckout();
 
         await expect(browser).toHaveUrlContaining('checkout-complete.html');
-        const headerText = await CheckoutPage.getCompleteHeaderText();
+        const headerText = await checkoutPage.getCompleteHeaderText();
         await expect(headerText).toBe('Thank you for your order!');
 
-        await CheckoutPage.returnToInventory();
+        await checkoutPage.returnToInventory();
         await expect(browser).toHaveUrlContaining('inventory.html');
     });
 });

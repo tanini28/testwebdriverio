@@ -1,16 +1,19 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import LoginPage from '../pageobjects/login.page.js';
+import loginPage from '../pageobjects/login.page.js';
 
 Given('User is located on the main page of saucedemo website', async () => {
-    await LoginPage.open();
+    await loginPage.open();
 });
 
 When('User click {string} button', async (buttonName) => {
-    // buttonName is not used here but could be useful for other scenarios
-    await LoginPage.clickLogin();
+    if (buttonName === 'Login') {
+        await loginPage.clickLogin();
+    } else {
+        throw new Error(`Button "${buttonName}" is not implemented`);
+    }
 });
 
 Then('User should see {string} error message', async (expectedMessage) => {
-    const errorMessage = await LoginPage.getErrorMessage();
+    const errorMessage = await loginPage.getErrorMessage();
     await expect(errorMessage).toBe(expectedMessage);
 });

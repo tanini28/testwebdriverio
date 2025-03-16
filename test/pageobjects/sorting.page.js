@@ -1,6 +1,6 @@
-import Page from './page.js';
+import page from './page.js';
 
-class sortingPage extends Page {
+class sortingPage extends page {
     get sortingDropdown() { return $('#sorting-dropdown'); }
     get items() { return $$('.item'); }
 

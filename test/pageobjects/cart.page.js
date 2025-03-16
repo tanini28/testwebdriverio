@@ -1,6 +1,6 @@
-import Page from './page.js';
+import page from './page.js';
 
-class cartPage extends Page {
+class cartPage extends page {
     get cartItem() { return $('.cart_item'); }
     get checkoutButton() { return $('#checkout'); }
     get errorMessage() { return $('.error-message'); }
@@ -15,8 +15,7 @@ class cartPage extends Page {
     }
     
     async isCartItemDisplayed() {
-        // Более простая и прямая проверка наличия элемента
-        return await this.cartItem.isDisplayed().catch(() => false);
+       return await this.cartItem.isDisplayed().catch(() => false);
     }
     
     async getErrorMessage() {

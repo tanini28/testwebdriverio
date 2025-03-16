@@ -1,4 +1,4 @@
-export default class Page {
+export default class page{
     async open(path = '') {
         return browser.url(`https://www.saucedemo.com/${path}`);
     }

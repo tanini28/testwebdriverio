@@ -1,6 +1,6 @@
-import Page from './page.js';
+import page from './page.js';
 
-class footerPage extends Page {
+class footerPage extends page {
     get twitterLink() { return $('.social_twitter a'); }
     get facebookLink() { return $('.social_facebook a'); }
     get linkedinLink() { return $('.social_linkedin a'); }
